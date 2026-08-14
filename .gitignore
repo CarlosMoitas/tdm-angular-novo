@@ -6,10 +6,16 @@
 /out-tsc
 /bazel-out
 
-# Node
-/node_modules
+# Node (qualquer profundidade — ex.: /node_modules e /server/node_modules)
+node_modules/
 npm-debug.log
 yarn-error.log
+*.log
+
+# Servidor próprio (server/) — segredos e artefatos gerados em runtime
+/server/.env
+/server/dist
+/server/storage/
 
 # IDEs and editors
 .idea/
@@ -42,6 +48,11 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Arquivos temporários e de sistema
+*.tmp
+*.temp
+*~
 
 # graphify-axet
 .graphify/

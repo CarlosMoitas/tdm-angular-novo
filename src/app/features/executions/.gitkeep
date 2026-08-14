@@ -1,0 +1,4 @@
+Reservado para a futura feature de execução de requests TDM
+(POST /gw/api/requests/submit-and-download).
+
+Infraestrutura já disponível em core/services/job.service.ts.

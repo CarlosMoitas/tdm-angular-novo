@@ -1,0 +1,4 @@
+Reservado para a futura feature de consulta de status de jobs
+(GET /gw/api/jobs/:jobId/status, POST /gw/api/jobs/:jobId/download-artifact).
+
+Infraestrutura já disponível em core/services/job.service.ts.

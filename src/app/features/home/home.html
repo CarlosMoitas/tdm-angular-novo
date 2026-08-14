@@ -1,0 +1,65 @@
+<div class="bradesco-theme">
+  <app-navbar [userName]="authService.user()?.username ?? ''"></app-navbar>
+
+  <main class="content-container">
+    @if (errorMessage()) {
+      <div class="error-banner" role="alert">{{ errorMessage() }}</div>
+    }
+
+    @if (workflowLog().length) {
+      <section class="workflow-log-card" aria-live="polite">
+        <h3 class="workflow-log-title">Acompanhamento do workflow</h3>
+        <ul class="workflow-log-list">
+          @for (entry of workflowLog(); track $index) {
+            <li class="workflow-log-item" [class]="'level-' + entry.level">
+              <span class="workflow-log-time">{{ entry.timestamp }}</span>
+              <span class="workflow-log-message">{{ entry.message }}</span>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+
+    <section class="filter-card">
+      <div class="filter-grid">
+        <div class="input-group">
+          <label for="catalog-select">Catálogos</label>
+          <select id="catalog-select" [(ngModel)]="selectedCatalogId">
+            <option value="">-- Selecione --</option>
+            @for (catalog of catalogs(); track catalog.id) {
+              <option [value]="catalog.id">{{ catalog.label }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="input-group catalog-search-group">
+          <label for="catalog-search">Buscar card ou catálogo</label>
+          <div class="catalog-search-control">
+            <input
+              id="catalog-search"
+              type="search"
+              placeholder="Ex.: contas, débito ou ID"
+              [(ngModel)]="searchTerm"
+              aria-label="Buscar card ou catálogo em todos os projetos"
+            />
+            <svg class="catalog-search-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="m21 21-4.35-4.35m1.35-5.15a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="catalog-section">
+      @if (filteredCards().length) {
+        <div class="catalog-grid">
+          @for (card of filteredCards(); track card.id) {
+            <app-catalog-card [card]="card" (generate)="onGenerate($event)"></app-catalog-card>
+          }
+        </div>
+      } @else {
+        <div class="empty-state">Nenhum card encontrado para os filtros selecionados.</div>
+      }
+    </section>
+  </main>
+</div>

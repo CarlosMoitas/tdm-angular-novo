@@ -1,0 +1,43 @@
+<header class="navbar">
+  <div class="navbar-container">
+    <div class="logo-area">
+      <img class="brand-logo" src="img/bradesco-logo-branco.png" alt="Bradesco" />
+      <span class="brand-divider">|</span>
+      <span class="portal-name">PORTAL TDM NEGÓCIOS</span>
+    </div>
+
+    <div class="navbar-status-group">
+      <div
+        class="connection-badge"
+        [class]="'connection-badge--' + connectionStatus()"
+        [title]="healthMessage()"
+      >
+        <span class="connection-dot"></span>
+        <span>{{ connectionLabel }}</span>
+      </div>
+      @if (userName) {
+        <div class="user-badge">Olá, {{ userName }}</div>
+      }
+      <button
+        type="button"
+        class="theme-toggle"
+        (click)="toggleTheme()"
+        [attr.aria-label]="themeService.isDark() ? 'Ativar modo claro' : 'Ativar modo escuro'"
+        [title]="themeService.isDark() ? 'Modo claro' : 'Modo escuro'"
+      >
+        @if (themeService.isDark()) {
+          <!-- Ícone de sol (ativar modo claro) -->
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+          </svg>
+        } @else {
+          <!-- Ícone de lua (ativar modo escuro) -->
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
+          </svg>
+        }
+      </button>
+    </div>
+  </div>
+</header>

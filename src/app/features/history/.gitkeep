@@ -1,0 +1,4 @@
+Reservado para a futura feature de histórico de execuções/downloads
+realizados via Gateway do Portal TDM.
+
+Infraestrutura já disponível em core/services/job.service.ts.

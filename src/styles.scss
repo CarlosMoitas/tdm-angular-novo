@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Paleta de Cores Bradesco */
+:root {
+  --bradesco-red: #cc092f;
+  --bradesco-dark-red: #99001c;
+  --bradesco-bg: #f5f7fa;
+  --bradesco-text: #333333;
+  --bradesco-muted: #666666;
+  --card-bg: #ffffff;
+  --border-color: #e2e8f0;
+}
+
+/* Paleta de Cores - Dark Mode */
+html.dark-theme {
+  --bradesco-red: #e0193f;
+  --bradesco-dark-red: #b8102f;
+  --bradesco-bg: #14161a;
+  --bradesco-text: #e5e7eb;
+  --bradesco-muted: #9ca3af;
+  --card-bg: #1f2228;
+  --border-color: #2e323a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bradesco-bg);
+  color: var(--bradesco-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}

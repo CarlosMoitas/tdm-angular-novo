@@ -1,0 +1,40 @@
+<div class="login-page">
+  <form class="login-card" (ngSubmit)="onSubmit()">
+    <img class="login-card__logo" src="img/bradesco-logo-branco.png" alt="Bradesco" />
+
+    <h1 class="login-card__title">Portal TDM</h1>
+    <p class="login-card__subtitle">Entre com seu usuário corporativo</p>
+
+    <label class="login-field">
+      <span>Usuário</span>
+      <input
+        type="text"
+        name="username"
+        autocomplete="username"
+        [(ngModel)]="username"
+        [disabled]="loading()"
+        required
+      />
+    </label>
+
+    <label class="login-field">
+      <span>Senha</span>
+      <input
+        type="password"
+        name="password"
+        autocomplete="current-password"
+        [(ngModel)]="password"
+        [disabled]="loading()"
+        required
+      />
+    </label>
+
+    @if (errorMessage()) {
+      <p class="login-error">{{ errorMessage() }}</p>
+    }
+
+    <button type="submit" class="login-submit" [disabled]="loading()">
+      {{ loading() ? 'Entrando...' : 'Entrar' }}
+    </button>
+  </form>
+</div>
