@@ -51,6 +51,18 @@ const VTFNODE_NAME = '02 - Conta Corrente PF';
  * A configuração técnica (configurationId) varia por ambiente (TI/TU) —
  * ver `workflow-environment.ts`. O levelID e o dataDesign são os mesmos
  * em ambos os ambientes.
+ *
+ * IMPORTANTE:
+ * para esta rotina o request só roda de forma estável quando o payload
+ * mantém a conexão completa com `DB204P` tanto na origem quanto no alvo.
+ * Ou seja, os campos abaixo NÃO devem ser esvaziados nesta etapa:
+ * - `dataSourceProfile`
+ * - `dataTargetProfile`
+ * - `globalSourceConnection`
+ * - `globalTargetConnection`
+ *
+ * Isso foi validado a partir de payload funcional já executado com
+ * sucesso no fluxo antigo do portal.
  */
 export function buildAgendarDebitoAutomaticoPayload(
   formData: AgendarDebitoAutomaticoFormData,

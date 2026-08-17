@@ -4,7 +4,11 @@ import {
   WorkflowEnvironment,
   getHabilitarContaMaEnvConfig,
 } from './workflow-environment';
-import { WORKFLOW_EMAIL, WORKFLOW_USERNAME_FALLBACK } from './shared-request-defaults';
+import {
+  WORKFLOW_EMAIL,
+  WORKFLOW_PROJETO_JIRA,
+  WORKFLOW_USERNAME_FALLBACK,
+} from './shared-request-defaults';
 
 /**
  * Dados necessários para montar o payload do card "Habilitar Conta MA",
@@ -28,7 +32,7 @@ export interface HabilitarContaMaFormData {
 const DATA_DESIGN_PROJECT_ID = 3862;
 const DATA_DESIGN_VERSION_ID = 3863;
 
-const DEFAULT_PROJETO_JIRA = 'CPTDM-CORPORATIVO | TDM';
+const DEFAULT_PROJETO_JIRA = WORKFLOW_PROJETO_JIRA;
 
 /**
  * Constrói o payload de submissão do card "Habilitar Conta MA" no formato
@@ -96,7 +100,7 @@ export function buildHabilitarContaMaPayload(formData: HabilitarContaMaFormData)
       currentDay: now.getDate(),
       currentMonth: now.getMonth() + 1,
       currentYear: now.getFullYear(),
-      globalSourceConnection: '',
+      globalSourceConnection: 'DB204P',
       globalTargetConnection: '',
       jobSubmissionOrder: '0',
       jobTitle: 'Habilitar Conta MA Data Request',

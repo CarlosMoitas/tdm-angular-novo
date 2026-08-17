@@ -49,7 +49,7 @@ const CONTAS_CORRENTES_CONFIG: Record<WorkflowEnvironment, ContasCorrentesEnvCon
   TU: {
     ambienteLabel: 'PDB204P - TU',
     segmentoContaCorretePF: '000-CLIENTE CLASSIC',
-    configurationId: 2982,
+    configurationId: 2985,
   },
   TI: {
     ambienteLabel: 'PCM2AB  - NOVO TI',

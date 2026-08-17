@@ -19,6 +19,10 @@ function extractJobId(response: SubmitResponse): number | null {
   return jobId != null ? Number(jobId) : null;
 }
 
+function isTerminalStatus(status?: string): boolean {
+  return ['completed', 'failed', 'cancelled', 'canceled'].includes(normalizeStatus(status));
+}
+
 function pickDownloadableChildJob(job: TdmJob): TdmJob | null {
   const children = Array.isArray(job.jobs) ? job.jobs : [];
 
@@ -74,6 +78,33 @@ async function waitForJobCompletion(
 
       if (isCompleted(parentJob.status) && (!childJob || isCompleted(childJob.status))) {
         return { parentJob, childJob };
+      }
+
+      if (
+        isCompleted(parentJob.status) &&
+        Array.isArray(parentJob.jobs) &&
+        parentJob.jobs.length > 0 &&
+        parentJob.jobs.every((child) => isTerminalStatus(child.status))
+      ) {
+        const completedChild = pickDownloadableChildJob(parentJob);
+
+        if (completedChild) {
+          logger.warn(
+            `Job pai ${jobId} concluído sem marcar filho selecionado como concluído, mas existe child completed terminal. Assumindo sucesso pelo child job.`,
+            correlationId,
+            {
+              parentStatus: parentJob.status,
+              childStatuses: parentJob.jobs.map((child) => ({
+                jobId: child.jobId,
+                status: child.status,
+                type: child.type,
+              })),
+              selectedChildJobId: completedChild.jobId,
+            },
+          );
+
+          return { parentJob, childJob: completedChild };
+        }
       }
 
       if (['failed', 'cancelled', 'canceled'].includes(normalizeStatus(parentJob.status))) {

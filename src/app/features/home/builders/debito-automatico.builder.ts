@@ -4,7 +4,11 @@ import {
   WorkflowEnvironment,
   getDebitoAutomaticoEnvConfig,
 } from './workflow-environment';
-import { WORKFLOW_EMAIL, WORKFLOW_USERNAME_FALLBACK } from './shared-request-defaults';
+import {
+  WORKFLOW_EMAIL,
+  WORKFLOW_PROJETO_JIRA,
+  WORKFLOW_USERNAME_FALLBACK,
+} from './shared-request-defaults';
 
 /**
  * Dados necessários para montar o payload do card "Débito Automático"
@@ -35,7 +39,7 @@ const PUBLISH_JOB_LEVEL_ID = 3101;
 const VTFNODE_ID = '53470';
 const VTFNODE_NAME = 'Débito Automático Corrente Mobile e TF';
 
-const DEFAULT_PROJETO_JIRA = 'CPTDM-CORPORATIVO | TDM';
+const DEFAULT_PROJETO_JIRA = WORKFLOW_PROJETO_JIRA;
 
 /**
  * Constrói o payload de submissão do card "Débito Automático" no formato
@@ -117,7 +121,7 @@ export function buildDebitoAutomaticoPayload(formData: DebitoAutomaticoFormData)
           iterations: 1,
           csvDelimiter: null,
           csvQuotationMarks: null,
-          configurationId: envConfig.configurationId,
+          configurationId: 2369,
         },
       ],
       testMatches: [],
@@ -130,7 +134,7 @@ export function buildDebitoAutomaticoPayload(formData: DebitoAutomaticoFormData)
       currentDay: now.getDate(),
       currentMonth: now.getMonth() + 1,
       currentYear: now.getFullYear(),
-      globalSourceConnection: 'DB204P',
+      globalSourceConnection: '',
       globalTargetConnection: '',
       jobSubmissionOrder: '0',
       jobTitle: 'Débito Automático Data Request',

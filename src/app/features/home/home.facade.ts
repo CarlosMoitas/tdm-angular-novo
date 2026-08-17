@@ -175,7 +175,7 @@ export class HomeFacade {
         if (contaInfo?.found && contaInfo.conta) {
           const context: WorkflowContext = {
             environment,
-            agencia: agencia || contaInfo.agencia || '',
+            agencia: contaInfo.agencia || agencia || '',
             projetoJira: WORKFLOW_PROJETO_JIRA,
             conta: contaInfo.conta,
             username: formData.username || WORKFLOW_USERNAME_FALLBACK,
